@@ -85,7 +85,7 @@ end
 
 def player_numbers(team)
   numbers = []
-  game_hash.collect do |team, team_data|
+  game_hash.collect do |location, team_data|
     if team_data[:team_name] == team
       team_data[:players].each do |name, statistics|
         number << statistics[:number]

@@ -86,11 +86,23 @@ end
 def player_numbers(team)
   numbers = []
   game_hash.collect do |team, team_data|
-    if
+    if team_data[:team_name] == team
+      team_data[:players].each do |name, statistics|
+        number << statistics[:number]
+      end
+    end
+  end
+  numbers
 end
 
 def player_stats
-  
+  game_hash.each do |team, team_data|
+    team_data[:players].each do |name, statistics|
+      if name == player_name
+        return statistics
+      end
+    end
+  end
 end
 
 def big_show_rebounds

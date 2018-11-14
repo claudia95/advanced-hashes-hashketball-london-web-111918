@@ -26,91 +26,69 @@ def game_hash
     }
   }
 end
-
-def home_team_name
-  game_hash[:home][:team_name]
-end
-
-
-def good_practices
-  game_hash.each do |location, team_data|
-    #are you ABSOLUTELY SURE what 'location' and 'team data' are? use binding.pry to find out!
-    binding.pry
-      team_data.each do |attribute, data|
-        #are you ABSOLUTELY SURE what 'attribute' and 'team data' are? use binding.pry to find out!
-        binding.pry
- 
-        #what is 'data' at each loop through out .each block? when will the following line of code work and when will it break?
-        data.each do |data_item|
-            binding.pry
-      end
-    end
-  end
-  good_practices
-end
-
-def num_points_scored(player_name)
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |name, statistics|
+ def num_points_scored(player_name)
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, statistics|
       if name == player_name
         return statistics[:points]
       end
     end
   end
 end
-
-def shoe_size(player_name)
- game_hash.each do |location, team_data|
-    team_data[:players].each do |name, statistics|
+ def shoe_size(player_name)
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, statistics|
       if name == player_name
-        return statistics[:shoe]
+        return team_info[:players][player_name][:shoe]
       end
     end
   end
 end
-
-def team_colors
-  game_hash.each do |location, team_data|
-    team_data[:team_name] == team
-      return team_data[:colors]
+ def team_colors(team)
+  game_hash.each do |location, team_info|
+    if team_info[:team_name] == team
+      return team_info[:colors]
     end
   end
 end
-
-def team_names
-  game_hash.collect do |team, team_data|
-    game_hash[team][:team_name]
+ def team_names
+  game_hash.collect do |location, team_info|
+    game_hash[location][:team_name]
   end
 end
-
-def player_numbers(team)
+ def player_numbers(team)
   numbers = []
-  game_hash.collect do |team, team_data|
-    if team_data[:team_name] == team
-      team_data[:players].each do |name, statistics|
+  game_hash.collect do |location, team_info|
+    if team_info[:team_name] == team
+      team_info[:players].each do |name, statistics|
         numbers << statistics[:number]
       end
     end
   end
   numbers
 end
-
-def player_stats(player_name)
-  game_hash.each do |location, team_data|
-    team_data[:players].each do |name, statistics|
+ def player_stats(player_name)
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, statistics|
       if name == player_name
         return statistics
       end
     end
   end
 end
-
-def big_show_rebounds
-  
+ def big_shoe_rebounds
+  shoe_size = 0
+  num_rebounds = 0
+  game_hash.each do |location, team_info|
+    team_info[:players].each do |name, statistics|
+      if statistics[:shoe] > shoe_size
+        shoe_size = statistics[:shoe]
+        num_rebounds = statistics[:rebounds]
+      end
+    end
+  end
+  num_rebounds
 end
-
-
-
 
 
 

@@ -84,7 +84,9 @@ def team_names
 end
 
 def player_numbers(team)
-  
+  numbers = []
+  game_hash.collect do |team, team_data|
+    if
 end
 
 def player_stats

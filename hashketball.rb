@@ -50,7 +50,7 @@ def good_practices
 end
 
 def num_points_scored(player_name)
-  game_hash.each do |team, team_data|
+  game_hash.each do |location, team_data|
     team_data[:players].each do |name, statistics|
       if name == player_name
         return statistics[:points]
@@ -60,7 +60,7 @@ def num_points_scored(player_name)
 end
 
 def shoe_size(player_name)
- game_hash.each do |team, team_data|
+ game_hash.each do |location, team_data|
     team_data[:players].each do |name, statistics|
       if name == player_name
         return statistics[:shoe]
@@ -70,8 +70,8 @@ def shoe_size(player_name)
 end
 
 def team_colors
-  game_hash.each do |team, team_data|
-    if team_data[:team_name] == team
+  game_hash.each do |location, team_data|
+    team_data[:team_name] == team
       return team_data[:colors]
     end
   end
